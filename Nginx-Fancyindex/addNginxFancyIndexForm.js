@@ -9,7 +9,7 @@
         'use strict';
 
         const THEME_STORAGE_KEY = 'fancyindex-theme';
-        const ITEMS_PER_PAGE = 100;
+        const ITEMS_PER_PAGE = 30;
 
         // Register Service Worker for offline support
         if ('serviceWorker' in navigator) {
@@ -116,7 +116,7 @@
                 });
 
                 breadcrumbNav.appendChild(copyBtn);
-                heading.textContent = 'Directory';
+                heading.textContent = '重庆大学开源软件镜像站';
                 heading.after(breadcrumbNav);
         }
 
