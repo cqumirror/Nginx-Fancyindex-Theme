@@ -53,8 +53,8 @@ html {
         --muted: #5e6877;                 /* secondary text */
         --row-hover: #eef1f8;             /* table row hover */
         --rule: #d7dde6;                  /* borders / rules */
-        --accent: #2d6cdf;                /* accent + links */
-        --focus: 0 0 0 3px rgba(45, 108, 223, 0.25); /* focus ring shadow */
+        --accent: #1ccb4c;                /* accent + links */
+        --focus: 0 0 0 3px rgba(28, 203, 76, 0.25); /* focus ring shadow */
         --link: var(--accent);              /* primary link color */
         --clear-link: var(--muted);         /* subtle action links */
         --input-border: var(--rule);        /* input border */
@@ -81,16 +81,16 @@ body.theme-dark {
         --muted: #9099a3;
         --row-hover: #3d4351;
         --rule: #3c404a;
-        --accent: #cfd6df;
-        --focus: 0 0 0 3px rgba(255, 255, 255, 0.25);
-        --link: #ffffff;
+        --accent: #1ccb4c;
+        --focus: 0 0 0 3px rgba(28, 203, 76, 0.35);
+        --link: var(--accent);
         --clear-link: #cbd3dc;
         --input-border: #3c404a;
-        --focus-border: #cfd6df;
+        --focus-border: var(--accent);
         --table-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
         --td-border: rgba(255, 255, 255, 0.07);
         --parent-hover: #2a2a2a;
-        --footer-link: #ffffff;
+        --footer-link: var(--accent);
         --toggle-bg: #1f222b;
         --toggle-fg: #ffffff;
         --toggle-border: rgba(255, 255, 255, 0.12);
