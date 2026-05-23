@@ -1,11 +1,22 @@
 <div id="raw_include_README_md"></div>
 <footer>
-    Theme available on <a href="https://GitHub.com/Naereen/Nginx-Fancyindex-Theme">GitHub</a> by <a href="https://GitHub.com/Naereen">Naereen</a>, © 2015-18, released under <a href="https://lbesson.mit-license.org/">the MIT License</a>.
+    <p>本站在 <a href="http://net.cqu.edu.cn/" target="_blank" style="text-decoration: none; "><b>重庆大学 信息化办公室</b></a> 的支持下创办，由
+        <a href="http://lanunion.cqu.edu.cn/" target="_blank" style="text-decoration: none; "><b>重庆大学蓝盟</b></a> 运营维护.</p>
+    <p>本站镜像同步工具 fork 自清华大学 TUNA 协会的 <a href="https://github.com/tuna/tunasync" target="_blank" style="text-decoration: none; "><b><em>镜像管理器</em></b></a>
+        项目. <a href="https://github.com/cqumirror/mirror-frontend" target="_blank" style="text-decoration: none; "><b><em>镜像站前端</em></b> 基于
+            <b>NuxtJS</b> 自行构建.</a></p>
+    <p><b>Contact Us:</b>
+    <a href="mailto:cqumirror@gmail.com" style="text-decoration: none; ">Mail</a>
+    <a href="https://github.com/cqumirror/feedback" style="text-decoration: none; ">Github</a>
+    </p>
+    Theme available on <a href="https://GitHub.com/Naereen/Nginx-Fancyindex-Theme">GitHub</a> by <a
+        href="https://GitHub.com/Naereen">Naereen</a>, © 2015-18, released under <a
+        href="https://lbesson.mit-license.org/">the MIT License</a>.
 </footer>
-    <script src="/Nginx-Fancyindex/addNginxFancyIndexForm.js" defer></script>
-    <script src="/Nginx-Fancyindex/showdown.min.js"></script>
-    <script src="/Nginx-Fancyindex/purify.min.js"></script>
-    <script>
+<script src="/Nginx-Fancyindex/addNginxFancyIndexForm.js" defer></script>
+<script src="/Nginx-Fancyindex/showdown.min.js"></script>
+<script src="/Nginx-Fancyindex/purify.min.js"></script>
+<script>
     (function () {
         'use strict';
 
@@ -20,7 +31,7 @@
             return;
         }
 
-        const converter = new showdown.Converter({ tables: true });
+        const converter = new showdown.Converter({tables: true});
 
         function findListingLink(name) {
             const links = document.querySelectorAll('#list tbody tr td a');
@@ -66,7 +77,7 @@
         renderMarkdown('raw_include_HEADER_md', 'HEADER.md');
         renderMarkdown('raw_include_README_md', 'README.md');
     }());
-    </script>
+</script>
 </body>
 </html>
 <!--
