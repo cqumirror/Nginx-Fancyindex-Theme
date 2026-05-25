@@ -187,9 +187,10 @@ a.clear:hover {
 }
 
 /* =========================
-   Theme toggle button
+   Theme toggle button and layout toggle
    ========================= */
-.theme-toggle {
+.theme-toggle,
+.layout-toggle {
         appearance: none;
         border-radius: 999px;                               /* pill */
         border: 1px solid var(--toggle-border);
@@ -204,17 +205,24 @@ a.clear:hover {
         gap: 0.45rem;                                       /* icon/text spacing */
 }
 
-.theme-toggle:hover {
+.theme-toggle,
+.layout-toggle:hover {
         background: var(--toggle-hover-bg);
 }
 
-.theme-toggle:focus-visible {
+.theme-toggle,
+.layout-toggle:focus-visible {
         outline: none;
         box-shadow: var(--focus);                           /* tokenized focus ring */
 }
 
-.theme-toggle[aria-pressed="true"] {
+.theme-toggle,
+.layout-toggle[aria-pressed="true"] {
         font-weight: 600;                                   /* pressed state emphasis */
+}
+/*布局按钮电脑端默认隐藏*/
+.layout-toggle {
+    display: none;
 }
 
 /* =========================
@@ -626,34 +634,34 @@ footer a {
    Converts the table into stacked cards and adjusts controls
    ========================= */
 @media (max-width: 720px) {
-        body {
+        body:not(.keep-table) {
                 padding: clamp(16px, 4vw, 32px);
                 box-shadow: none;
         }
 
         /* Stack table elements as blocks for small screens */
-        table,
-        thead,
-        tbody,
-        th,
-        td,
-        tr {
-                display: block;
-                width: 100%;
+        body:not(.keep-table) table,
+        body:not(.keep-table) thead,
+        body:not(.keep-table) tbody,
+        body:not(.keep-table) th,
+        body:not(.keep-table) td,
+        body:not(.keep-table) tr {
+            display: block;
+            width: 100%;
         }
 
-        table {
+        body:not(.keep-table) table {
                 background: transparent;
                 box-shadow: none;
                 border-radius: 0;
                 overflow: visible;
         }
 
-        thead {
+        body:not(.keep-table) thead {
                 display: none;                               /* hide header row on mobile */
         }
 
-        tr {
+        body:not(.keep-table) tr {
                 margin-bottom: 16px;
                 border: 1px solid var(--td-border);
                 border-radius: 12px;
@@ -662,11 +670,11 @@ footer a {
                 background: var(--bg-elev);
         }
 
-        body.theme-dark tr {
+        body.theme-dark:not(.keep-table) tr {
                 box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
         }
 
-        td {
+        body:not(.keep-table) td {
                 padding: 12px 16px;
                 border-bottom: 1px solid var(--td-border);
                 display: flex;
@@ -674,12 +682,12 @@ footer a {
                 gap: 12px;
         }
 
-        td:last-child {
+        body:not(.keep-table) td:last-child {
                 border-bottom: none;
                 text-align: left;
         }
 
-        td::before {
+        body:not(.keep-table) td::before {
                 content: attr(data-label);                   /* adds pseudo header */
                 font-weight: 600;
                 color: rgba(27, 31, 42, 0.7);
@@ -687,24 +695,24 @@ footer a {
                 letter-spacing: 0.04em;
         }
 
-        body.theme-dark td::before {
+        body.theme-dark:not(.keep-table) td::before {
                 color: rgba(255, 255, 255, 0.65);
         }
 
         /* Fallback labels if data-label not provided */
-        td:nth-of-type(1):not([data-label])::before {
+        body:not(.keep-table) td:nth-of-type(1):not([data-label])::before {
                 content: 'Name';
         }
 
-        td:nth-of-type(2):not([data-label])::before {
+        body:not(.keep-table) td:nth-of-type(2):not([data-label])::before {
                 content: 'Size';
         }
 
-        td:nth-of-type(3):not([data-label])::before {
+        body:not(.keep-table) td:nth-of-type(3):not([data-label])::before {
                 content: 'Last modified';
         }
 
-        td:nth-of-type(4):not([data-label])::before {
+        body:not(.keep-table) td:nth-of-type(4):not([data-label])::before {
                 content: 'Description';
         }
 
@@ -734,5 +742,9 @@ footer a {
                 padding: 0.4rem 0.75rem;
                 margin-left: 0;
                 margin-top: 0.5rem;
+        }
+        /*手机端启用布局按钮*/
+        .layout-toggle {
+            display: inline-block;
         }
 }
