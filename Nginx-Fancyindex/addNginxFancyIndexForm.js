@@ -9,8 +9,8 @@
         'use strict';
 
         const THEME_STORAGE_KEY = 'fancyindex-theme';
+        const LAYOUT_STORAGE_KEY = 'fancyindex-layout';
         const ITEMS_PER_PAGE = 30;
-
         // Register Service Worker for offline support
         if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('/Nginx-Fancyindex/sw.js').catch((err) => {
@@ -23,6 +23,7 @@
         const heading = document.querySelector('h1');
         const controls = document.createElement('div');
         const themeToggle = document.createElement('button');
+        const layoutToggle = document.createElement('button');
         const body = document.body;
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
         const table = document.querySelector('#list');
@@ -49,7 +50,7 @@
                 const rootLi = document.createElement('li');
                 const rootLink = document.createElement('a');
                 rootLink.href = '/';
-                rootLink.textContent = 'Root';
+                rootLink.textContent = '首页';
                 rootLi.appendChild(rootLink);
                 breadcrumbList.appendChild(rootLi);
 
@@ -78,9 +79,9 @@
                 // Add copy URL button
                 const copyBtn = document.createElement('button');
                 copyBtn.className = 'copy-page-url-btn';
-                copyBtn.textContent = 'Copy URL';
-                copyBtn.title = 'Copy current page URL';
-                copyBtn.setAttribute('aria-label', 'Copy current page URL');
+                copyBtn.textContent = '复制链接';
+                copyBtn.title = '复制当前页面链接';
+                copyBtn.setAttribute('aria-label', '复制当前页面链接');
                 copyBtn.type = 'button';
 
                 copyBtn.addEventListener('click', async () => {
@@ -101,14 +102,14 @@
                                         document.body.removeChild(textarea);
                                 }
                                 //console.log('Text copied to clipboard:', url);
-                                copyBtn.textContent = 'Copied!';
+                                copyBtn.textContent = '已复制！';
                                 setTimeout(() => {
                                         copyBtn.textContent = originalText;
                                 }, 2000);
                         } catch (err) {
                                 console.error(err)
                                 const originalText = copyBtn.textContent;
-                                copyBtn.textContent = 'Failed';
+                                copyBtn.textContent = '复制失败';
                                 setTimeout(() => {
                                         copyBtn.textContent = originalText;
                                 }, 2000);
@@ -127,14 +128,14 @@
         // Theme toggle with Auto/Light/Dark modes
         themeToggle.type = 'button';
         themeToggle.className = 'theme-toggle';
-        themeToggle.setAttribute('aria-label', 'Change theme');
+        themeToggle.setAttribute('aria-label', '切换主题');
 
         const themeOptions = ['auto', 'light', 'dark'];
         let currentThemeIndex = 0;
 
         function updateThemeButton() {
                 const theme = themeOptions[currentThemeIndex];
-                const labels = { auto: 'Auto', light: 'Light', dark: 'Dark' };
+                const labels = { auto: '自动', light: '亮色', dark: '暗色' };
                 themeToggle.textContent = labels[theme];
                 themeToggle.setAttribute('data-theme', theme);
         }
@@ -149,12 +150,37 @@
 
         controls.appendChild(themeToggle);
 
+        // 添加表格/卡片切换
+        layoutToggle.type = 'button';
+        layoutToggle.className = 'layout-toggle';
+        layoutToggle.setAttribute('aria-label', '切换表格/卡片');
+
+        const layoutOptions = ['grid', 'list'];
+        let currentLayoutIndex = 0;
+
+        function updateLayoutButton() {
+            const layout = layoutOptions[currentLayoutIndex];
+            const labels = { grid: '卡片模式', list: '表格模式' };
+            layoutToggle.textContent = labels[layout];
+            layoutToggle.setAttribute('data-theme', layout);
+        }
+
+        layoutToggle.addEventListener('click', () => {
+            currentLayoutIndex = (currentLayoutIndex + 1) % 2;
+            const layout = layoutOptions[currentLayoutIndex];
+            storeLayout(layout);
+            applyLayout(layout);
+            updateLayoutButton();
+        });
+
+        controls.appendChild(layoutToggle);
+
         // Search input
         input.name = 'filter';
         input.id = 'search';
         input.type = 'search';
-        input.placeholder = 'Type to search...';
-        input.setAttribute('aria-label', 'Search directory');
+        input.placeholder = '输入搜索内容...';
+        input.setAttribute('aria-label', '搜索目录');
         form.appendChild(input);
         controls.appendChild(form);
 
@@ -176,13 +202,13 @@
                 const paginationDiv = document.createElement('div');
                 paginationDiv.className = 'pagination';
                 paginationDiv.setAttribute('role', 'navigation');
-                paginationDiv.setAttribute('aria-label', 'Pagination');
+                paginationDiv.setAttribute('aria-label', '分页导航');
 
                 const info = document.createElement('span');
                 info.className = 'pagination-info';
                 const start = (currentPage - 1) * ITEMS_PER_PAGE + 1;
                 const end = Math.min(currentPage * ITEMS_PER_PAGE, filteredItems.length);
-                info.textContent = `Showing ${start}-${end} of ${filteredItems.length}`;
+                info.textContent = `显示第 ${start}-${end} 项，共 ${filteredItems.length} 项`;
                 paginationDiv.appendChild(info);
 
                 const buttonsDiv = document.createElement('div');
@@ -190,7 +216,7 @@
 
                 // Previous button
                 const prevBtn = document.createElement('button');
-                prevBtn.textContent = '← Previous';
+                prevBtn.textContent = '← 上一页';
                 prevBtn.className = 'pagination-btn';
                 prevBtn.disabled = currentPage === 1;
                 prevBtn.addEventListener('click', () => {
@@ -238,7 +264,7 @@
 
                 // Next button
                 const nextBtn = document.createElement('button');
-                nextBtn.textContent = 'Next →';
+                nextBtn.textContent = '下一页 →';
                 nextBtn.className = 'pagination-btn';
                 nextBtn.disabled = currentPage === totalPages;
                 nextBtn.addEventListener('click', () => {
@@ -367,21 +393,51 @@
                 body.classList.remove('theme-light', 'theme-dark');
                 body.classList.add(`theme-${actualTheme}`);
         }
-
         function handleSystemThemeChange(event) {
-                const storedTheme = getStoredTheme();
-                if (storedTheme === 'auto') {
-                        applyTheme('auto');
-                }
+            const storedTheme = getStoredTheme();
+            if (storedTheme === 'auto') {
+                applyTheme('auto');
+            }
+        }
+
+        //添加布局管理
+        function getStoredLayout() {
+            try {
+                return localStorage.getItem(LAYOUT_STORAGE_KEY) || 'grid';
+            } catch (error) {
+                return 'grid';
+            }
+        }
+
+        function storeLayout(layout) {
+            try {
+                localStorage.setItem(LAYOUT_STORAGE_KEY, layout);
+            } catch (error) {
+                // Storage not available
+            }
+        }
+
+        function applyLayout(layout) {
+            if (layout === 'list') {
+                document.body.classList.add('keep-table');
+            } else if (layout === 'grid') {
+                document.body.classList.remove('keep-table');
+            }
         }
 
         // Initialize theme
         const storedTheme = getStoredTheme();
+
         currentThemeIndex = themeOptions.indexOf(storedTheme);
         if (currentThemeIndex === -1) currentThemeIndex = 0;
         applyTheme(storedTheme);
         updateThemeButton();
-
+        // 初始化布局按钮
+        const storedLayout = getStoredLayout();
+        applyLayout(storedLayout)
+        currentLayoutIndex = layoutOptions.indexOf(storedLayout);
+        if (currentLayoutIndex === -1) currentLayoutIndex = 0;
+        updateLayoutButton();
         // Keyboard shortcuts
         document.addEventListener('keydown', (event) => {
                 const activeElement = document.activeElement;
