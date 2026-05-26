@@ -107,7 +107,7 @@ html {
         color: var(--muted);                                /* default text color (secondary) */
         font-weight: 300;
         font-size: clamp(14px, 1.2vw, 16px);                /* fluid base size */
-        line-height: 1.6;                                   /* TO DO: 1.6x font height is "confortable", add toggle for condensed ~1.2*/
+        line-height: 1.2;                                   /* TO DO: 1.6x font height is "confortable", add toggle for condensed ~1.2*/
         text-size-adjust: 100%;
         background-color: var(--bg);
 }
