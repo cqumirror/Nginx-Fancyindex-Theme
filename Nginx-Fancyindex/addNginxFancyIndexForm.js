@@ -10,7 +10,7 @@
 
         const THEME_STORAGE_KEY = 'fancyindex-theme';
         const LAYOUT_STORAGE_KEY = 'fancyindex-layout';
-        const ITEMS_PER_PAGE = 30;
+        const ITEMS_PER_PAGE = 50;
         // Register Service Worker for offline support
         if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('/Nginx-Fancyindex/sw.js').catch((err) => {
