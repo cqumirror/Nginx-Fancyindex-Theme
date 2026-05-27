@@ -1,0 +1,20 @@
+--2026-05-27 23:51:51--  https://github.com/showdownjs/showdown/archive/refs/tags/1.8.6.tar.gz
+Resolving github.com (github.com)... 20.205.243.166
+Connecting to github.com (github.com)|20.205.243.166|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://codeload.github.com/showdownjs/showdown/tar.gz/refs/tags/1.8.6 [following]
+--2026-05-27 23:51:52--  https://codeload.github.com/showdownjs/showdown/tar.gz/refs/tags/1.8.6
+Resolving codeload.github.com (codeload.github.com)... 20.205.243.165
+Connecting to codeload.github.com (codeload.github.com)|20.205.243.165|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [application/x-gzip]
+Saving to: ‘1.8.6.tar.gz’
+
+     0K .......... .......... .......... .......... ..........  316K
+    50K .......... .......... .......... .......... ..........  574K
+   100K .......... .......... .......... .......... ..........  607K
+   150K .......... .......... .......... .......... .......... 3.37M
+   200K .......... .......... .......... ......                1.90M=0.4s
+
+2026-05-27 23:51:53 (655 KB/s) - ‘1.8.6.tar.gz’ saved [241880]
+

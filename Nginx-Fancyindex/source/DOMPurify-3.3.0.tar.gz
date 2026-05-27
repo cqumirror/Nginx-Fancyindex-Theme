@@ -1,0 +1,24 @@
+--2026-05-27 23:51:24--  https://github.com/cure53/DOMPurify/archive/refs/tags/3.3.0.tar.gz
+Resolving github.com (github.com)... 20.205.243.166
+Connecting to github.com (github.com)|20.205.243.166|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://codeload.github.com/cure53/DOMPurify/tar.gz/refs/tags/3.3.0 [following]
+--2026-05-27 23:51:25--  https://codeload.github.com/cure53/DOMPurify/tar.gz/refs/tags/3.3.0
+Resolving codeload.github.com (codeload.github.com)... 20.205.243.165
+Connecting to codeload.github.com (codeload.github.com)|20.205.243.165|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [application/x-gzip]
+Saving to: ‘3.3.0.tar.gz’
+
+     0K .......... .......... .......... .......... ..........  361K
+    50K .......... .......... .......... .......... ..........  797K
+   100K .......... .......... .......... .......... ..........  537K
+   150K .......... .......... .......... .......... .......... 1.55M
+   200K .......... .......... .......... .......... .......... 1.39M
+   250K .......... .......... .......... .......... .......... 1.30M
+   300K .......... .......... .......... .......... .......... 16.4M
+   350K .......... .......... .......... .......... .......... 37.6M
+   400K .......... .......... .......... .......... ....       1.36M=0.4s
+
+2026-05-27 23:51:27 (1023 KB/s) - ‘3.3.0.tar.gz’ saved [454734]
+
